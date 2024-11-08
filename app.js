@@ -3,8 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import error from "./middleware/error.js";
-import usuariosRoutes from "./routes/usuarios.js";
-import swagger from "./routes/swagger.js";
+import usuariosRoutes from "./routes/items.js";
 import connectDb from "./config/db.js";
 
 connectDb();
@@ -18,10 +17,9 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/api-docs", swagger);
-app.use("/usuarios", usuariosRoutes);
+app.use("/api", usuariosRoutes);
 app.use(error.e404);
 
 app.listen(port, () => {
-  console.log(`Aplicacion funcionando en http://localhost:${port}/usuarios`);
+  console.log(`Aplicacion funcionando en http://localhost:${port}/api`);
 });
